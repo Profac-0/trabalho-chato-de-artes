@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Inicial - Jogo</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #222, #444);
+      font-family: 'Arial', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    
+
+    .menu {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding-top: 25%;
+    }
+
+    .menu-button {
+      padding: 20px 40px;
+      font-size: 28px;
+      border: 3px solid white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      min-width: 250px;
+    }
+
+    .selected {
+      background-color: #00c3ff;
+      color: black;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00c3ff;
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="menu" id="menu">
+  <div class="menu-button selected">Iniciar Jogo</div>
+  <div class="menu-button">Opções</div>
+  <div class="menu-button">Créditos</div>
+  <div class="menu-button">Sair</div>
+</div>
+
+<script>
+  const menuButtons = document.querySelectorAll('.menu-button');
+  let selectedIndex = 0;
+
+  function updateSelection() {
+    menuButtons.forEach((btn, index) => {
+      btn.classList.toggle('selected', index === selectedIndex);
+    });
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowDown') {
+      selectedIndex = (selectedIndex + 1) % menuButtons.length;
+      updateSelection();
+    } else if (event.key === 'ArrowUp') {
+      selectedIndex = (selectedIndex - 1 + menuButtons.length) % menuButtons.length;
+      updateSelection();
+    } else if (event.key === 'Enter') {
+      alert(`Você selecionou: ${menuButtons[selectedIndex].innerText}`);
+      console.log(`Selecionado: ${menuButtons[selectedIndex].innerText}`);
+    }
+  });
+</script>
+
+</body>
+</html>
